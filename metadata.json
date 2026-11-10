@@ -1,0 +1,6 @@
+{
+  "name": "Nearby Rest Locations",
+  "description": "Find hotels, restaurants, cabanas, and cafes near you with real-time location tracking, reviews, bookings, and interactive maps by Waves IT.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
