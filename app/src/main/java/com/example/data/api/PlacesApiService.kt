@@ -3,6 +3,7 @@ package com.example.data.api
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
+import retrofit2.http.Headers
 import retrofit2.http.POST
 import retrofit2.http.Query
 
@@ -25,9 +26,14 @@ interface GooglePlacesApi {
 }
 
 interface OverpassApi {
+    @Headers(
+        "User-Agent: NearbyRestLocations/1.0 (Android; wavesit.lk)",
+        "Accept: application/json"
+    )
     @FormUrlEncoded
     @POST("api/interpreter")
     suspend fun queryNearbyPlaces(
         @Field("data") query: String
     ): OverpassResponse
 }
+

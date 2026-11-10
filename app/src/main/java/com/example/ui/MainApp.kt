@@ -119,8 +119,14 @@ fun MainApp() {
         }
     }
 
-    // Automatically query real places when user's location changes
-    LaunchedEffect(locationState.latitude, locationState.longitude, locationState.townName) {
+    // Automatically query real places when user's location changes (stabilized coordinate key to prevent rapid micro-jitter restarts)
+    val locationKey = remember(locationState.latitude, locationState.longitude, locationState.townName) {
+        val latRound = Math.round(locationState.latitude * 1000.0) / 1000.0
+        val lngRound = Math.round(locationState.longitude * 1000.0) / 1000.0
+        "${locationState.townName}-$latRound-$lngRound"
+    }
+
+    LaunchedEffect(locationKey) {
         realPlacesRepo.fetchRealPlaces(
             locationState.latitude,
             locationState.longitude,
